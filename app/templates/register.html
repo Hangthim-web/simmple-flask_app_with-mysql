@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block title %} Register {% endblock %}
+{% block content %}
+ <h2 class="mb-4">Register New User</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('register') }}" class="card p-4 shadow">
+
+    <div class="row mb-3">
+      <div class="col">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="first_name" placeholder="John" required>
+      </div>
+
+      <div class="col">
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="last_name" placeholder="Doe" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" name="email" placeholder="example@gmail.com" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password" class="form-control" name="password" placeholder="Enter secure password" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Age (optional)</label>
+      <input type="number" class="form-control" name="age" placeholder="23">
+    </div>
+
+    <div class="form-check form-switch mb-3">
+      <input class="form-check-input" type="checkbox" name="is_active" checked>
+      <label class="form-check-label">Active User?</label>
+    </div>
+
+    <button class="btn btn-primary w-100">Register</button>
+
+  </form>
+
+{% endblock 5}

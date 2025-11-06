@@ -11,7 +11,7 @@
     {% endif %}
   {% endwith %}
 
-  <form method="POST" action="{{ url_for('register') }}" class="card p-4 shadow">
+  <form method="POST" action="{{ url_for('user.create_user') }}" class="card p-4 shadow">
 
     <div class="row mb-3">
       <div class="col">
@@ -49,4 +49,4 @@
 
   </form>
 
-{% endblock 5}
+{% endblock %}

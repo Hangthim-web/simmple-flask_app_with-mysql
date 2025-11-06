@@ -1,9 +1,9 @@
 from flask import Blueprint,render_template,session,request,redirect,url_for,flash
-from app.routes.user import db,User
+from app.models.user import db,User
 from werkzeug.security import generate_password_hash
-user_bp = Blueprint('auth',__name__)
+user_bp = Blueprint('user',__name__)
 
-@user_bp.route('create-user',methods=['GET','POST'])
+@user_bp.route('/create-user',methods=['GET','POST'])
 def create_user():
     if request.method=="POST":
         first_name = request.form.get('first_name')
@@ -11,12 +11,12 @@ def create_user():
         email = request.form.get('email')
         password = request.form.get('password')
         age = request.form.get('age')
-        is_active = request.form.get('is_active')
+        is_active = True if request.form.get('is_active') == "on" else False
 
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             flash("Email Already Registered !","danger")
-            return redirect(url_for('register'))
+            return redirect(url_for('user.create_user'))
         
         hashed_password = generate_password_hash(password)
 
@@ -32,6 +32,6 @@ def create_user():
         db.session.commit()
 
         flash("Registration Successful",'success')
-        return redirect(url_for('register'))
+        return redirect(url_for('user.create_user'))
     return render_template('register.html')
 

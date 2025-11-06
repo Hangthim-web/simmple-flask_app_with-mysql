@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Register New User</h2>
+ {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+<div class="blog_container">
+
+<form action="{{ url_for('blogs.create_blog') }}" method="POST">
+<div>
+
+    <label for="">Title</label>
+    <input type="text" name="title" id="blog_title">
+</div>
+<div>
+    <label for="">Description</label>
+    <textarea name="description" id="description"></textarea>
+</div>
+<button>Add Blog</button>
+</form>
+
+</div>
+{% endblock content %}
